@@ -1,9 +1,10 @@
 {% extends 'SteamID/Template.html' %}
 
 {% block title %}
-    1
+    {{ user.nick }}
 {% endblock %}
 
 {% block content %}
-{{ steam_id }}
+    <img src="{{ user.avatar }}">
+    {{ user.get_created }}
 {% endblock %}

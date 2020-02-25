@@ -1,9 +1,7 @@
-from keys import STEAM_API_KEY
-import requests
 from datetime import datetime
 
 
-class User:
+class SteamUser:
     def __init__(self, steam_data: dict):
         # PUBLIC DATA
         # steam id
@@ -36,6 +34,9 @@ class User:
         # get country (2 letters ISO code)
         self.country = steam_data.get('loccountrycode')
 
+    def __str__(self):
+        return self.nick
+
     def get_logoff(self):
         return datetime.utcfromtimestamp(self.logoff)
 
@@ -45,7 +46,6 @@ class User:
     def get_status(self):
         state = ('Offline', 'Online', 'Busy', 'Away', 'Snooze', 'looking to trade', 'looking to play')
         return state[self.state]
-
 
 
 
