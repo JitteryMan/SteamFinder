@@ -1,14 +1,28 @@
 {% extends 'SteamID/Template.html' %}
 
 {% block title %}
-    {{ user.nick }}
+    {{ user.nick }} - Steam Finder
 {% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
-<p>{{ steam_id }}</p>
-=======
-    <img src="{{ user.avatar }}">
-    {{ user.get_created }}
->>>>>>> 4ac49a0da2d15aea5cff262b3dd125439a2ef1d5
+    <img src="{{ user.avatar_big }}">
+    <p>steam id = {{ user.steam_id }}</p>
+    <p>nick = {{ user.nick }}</p>
+    <p>url = {{ user.url }}</p>
+    <p>avatar = {{ user.avatar_mini }}</p>
+    <p>status = {{ user.get_status }}</p>
+    <p>comment = {{ user.comment }}</p>
+    <p>realname = {{ user.realname }}</p>
+    <p>clanid = {{ user.clanid }}</p>
+    <p>logoff = {{ user.get_logoff }}</p>
+    <p>created = {{ user.get_created }}</p>
+    <p>appid = {{ user.in_game }}</p>
+    <p>serverip = {{ user.serverip }}</p>
+    <p>game info = {{ user.in_game_info }}</p>
+    <p>country = {{ user.country }}</p>
+    <p>level = {{ user.level }}</p>
+    <p>level = {{ user.get_visibility }}</p>
+
+    <progress max="{{ user.progress_max }}" value="{{ user.progress_curr }}">need {{ user.need_xp }}</progress>
+
 {% endblock %}
