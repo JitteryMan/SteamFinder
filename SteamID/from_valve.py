@@ -42,6 +42,13 @@ def get_friends(steamid: str):
         steamids = []
         for friend in friends.get('friendslist').get('friends'):
             steamids.append(friend.get('steamid'))
+        stacks = [steamids[i:i + 100] for i in range(0, len(steamids), 100)]
+        print(stacks)
+        users_stack = []
+        for stack in stacks:
+            users_stack.append(get_users(','.join(stack)))
+        print(users_stack)
+
 
 
 
@@ -53,6 +60,7 @@ def get_adv_user(steamid: str):
     user = get_users(steamid)
     if user:
         c_user = SteamUserAdv(user[0])
+        # todo nothing
         query = f'IPlayerService/GetBadges/v1/?key={STEAM_API_KEY}&steamid={steamid}'
         c_user.set_badges(_get_json(query))
         get_friends(steamid)
