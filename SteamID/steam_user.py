@@ -1,6 +1,10 @@
 from datetime import datetime
 
 
+def unix_to_default(unix_date):
+    return datetime.utcfromtimestamp(unix_date) if unix_date else '-'
+
+
 class SteamUser:
     def __init__(self, steam_data: dict):
         # PUBLIC DATA
@@ -17,7 +21,7 @@ class SteamUser:
         # steam user state
         self.state = steam_data.get('personastate')
         # steam user last logoff
-        self.logoff = steam_data.get('lastlogoff')
+        self.logoff = unix_to_default(steam_data.get('lastlogoff'))
         # can comment this user
         self.comment = steam_data.get('commentpermission')
         # public or private
@@ -28,7 +32,7 @@ class SteamUser:
         # steam user clan id
         self.clanid = steam_data.get('primaryclanid')
         # steam user create time (unix)
-        self.created = steam_data.get('timecreated')
+        self.created = unix_to_default(steam_data.get('timecreated'))
         # get game_id if user in game
         self.in_game = steam_data.get('gameid')
         # server ip if user game online
@@ -37,28 +41,36 @@ class SteamUser:
         self.in_game_info = steam_data.get('gameextrainfo')
         # get country (2 letters ISO code)
         self.country = steam_data.get('loccountrycode')
+        # todo поскольку это базовый класс, то может и его записывать в БД, хз
 
     def __str__(self):
         return self.nick
-
-    def get_logoff(self):
-        return datetime.utcfromtimestamp(self.logoff) if self.logoff else '-'
-
-    def get_created(self):
-        return datetime.utcfromtimestamp(self.created) if self.logoff else '-'
 
     def get_status(self):
         state = ('Offline', 'Online', 'Busy', 'Away', 'Snooze', 'looking to trade', 'looking to play')
         return state[self.state]
 
     def get_visibility(self):
-        state = ('Private', 'Friends only', 'Public')
-        return state[self.visibility-1]
+        state = ('-', 'Private', 'Friends only', 'Public')
+        return state[self.visibility]
+
+
+class FriendUser(SteamUser):
+    def set_relationship(self, relationship: str):
+        self.relationship = relationship
+
+    def set_friend_date(self, date_friend):
+        self.friend_date = unix_to_default(date_friend)
 
 
 class SteamUserAdv(SteamUser):
-    def friends(self):
-        pass
+    def friends_all(self, friends: dict):
+        self.friends = []
+        for friend in friends:
+            friend_user = FriendUser(friend.get('details'))
+            friend_user.set_relationship(friend.get('relationship'))
+            friend_user.set_friend_date(friend.get('friend_since'))
+            self.friends.append(friend_user)
 
     def set_badges(self, badges):
         self.badges = badges.get('response').get('badges')

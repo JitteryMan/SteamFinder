@@ -14,8 +14,8 @@
     <p>comment = {{ user.comment }}</p>
     <p>realname = {{ user.realname }}</p>
     <p>clanid = {{ user.clanid }}</p>
-    <p>logoff = {{ user.get_logoff }}</p>
-    <p>created = {{ user.get_created }}</p>
+    <p>logoff = {{ user.logoff }}</p>
+    <p>created = {{ user.created }}</p>
     <p>appid = {{ user.in_game }}</p>
     <p>serverip = {{ user.serverip }}</p>
     <p>game info = {{ user.in_game_info }}</p>
@@ -24,5 +24,10 @@
     <p>level = {{ user.get_visibility }}</p>
 
     <progress max="{{ user.progress_max }}" value="{{ user.progress_curr }}">need {{ user.need_xp }}</progress>
+
+    {% for friend in user.friends %}
+        <a href="{% url 'SteamID:user_detail' friend.steam_id %}">{{ friend }}</a>
+    {% endfor %}
+
 
 {% endblock %}
