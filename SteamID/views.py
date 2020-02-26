@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.utils import timezone
-from keys import STEAM_API_KEY
-import requests
 from .forms import FormID
+from .from_valve import get_user
 
 
 def index(request):
@@ -23,4 +21,5 @@ def index(request):
 
 def user_detail(request, steam_id):
     # todo request, next: create User class, write to DB
-    return render(request, 'SteamID/user-details.html', {'steam_id': steam_id})
+    user = get_user(steam_id)
+    return render(request, 'SteamID/user-details.html', {'user': user})
