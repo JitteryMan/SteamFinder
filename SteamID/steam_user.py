@@ -1,8 +1,8 @@
 from datetime import datetime
-
+from .steam_api import APP_MEDIA
 
 def unix_to_default(unix_date):
-    return datetime.utcfromtimestamp(unix_date) if unix_date else '-'
+    return datetime.utcfromtimestamp(unix_date) if unix_date else None
 
 
 class SteamUser:
@@ -41,6 +41,14 @@ class SteamUser:
         self.in_game_info = steam_data.get('gameextrainfo')
         # get country (2 letters ISO code)
         self.country = steam_data.get('loccountrycode')
+        # BANS
+        self.ban_community = steam_data.get('ban').get('CommunityBanned')
+        self.ban_VAC = steam_data.get('ban').get('VACBanned')
+        self.ban_VAC_count = steam_data.get('ban').get('NumberOfVACBans')
+        self.ban_last = unix_to_default(steam_data.get('ban').get('DaysSinceLastBan'))
+        self.ban_game = steam_data.get('ban').get('NumberOfGameBans')
+        self.ban_economy = steam_data.get('ban').get('EconomyBan')
+
         # todo поскольку это базовый класс, то может и его записывать в БД, хз
 
     def __str__(self):
@@ -51,7 +59,7 @@ class SteamUser:
         return state[self.state]
 
     def get_visibility(self):
-        state = ('-', 'Private', 'Friends only', 'Public')
+        state = (None, 'Private', 'Friends only', 'Public')
         return state[self.visibility]
 
 
@@ -64,7 +72,7 @@ class FriendUser(SteamUser):
 
 
 class SteamUserAdv(SteamUser):
-    def friends_all(self, friends: dict):
+    def friends_all(self, friends: list):
         self.friends = []
         for friend in friends:
             friend_user = FriendUser(friend.get('details'))
@@ -72,7 +80,7 @@ class SteamUserAdv(SteamUser):
             friend_user.set_friend_date(friend.get('friend_since'))
             self.friends.append(friend_user)
 
-    def set_badges(self, badges):
+    def set_badges(self, badges: dict):
         self.badges = badges.get('response').get('badges')
         self.level = badges.get('response').get('player_level')
         self.need_xp = badges.get('response').get('player_xp_needed_to_level_up')
@@ -81,7 +89,27 @@ class SteamUserAdv(SteamUser):
         self.progress_max = self.xp + self.need_xp - self.xp_curr_lvl
         self.progress_curr = self.xp - self.xp_curr_lvl
 
+    def set_games(self, games: dict):
+        self.games_count = games.get('response').get('game_count')
+        self.games = []
+        for game in games['response']['games']:
+            self.games.append(Games(game))
 
 
+class Games:
+    def __init__(self, game_info: dict):
+        self.app_id = game_info.get('appid')
+        self.app_name = game_info.get('name')
+        self.app_play_time = game_info.get('playtime_forever')
+        self.app_icon = f'{APP_MEDIA}{self.app_id}/{game_info.get("img_icon_url")}.jpg'
+        self.app_logo = f'{APP_MEDIA}{self.app_id}/{game_info.get("img_logo_url")}.jpg'
+        self.app_visible = game_info.get('has_community_visible_stats')
+        self.app_windows = game_info.get('playtime_windows_forever')
+        self.app_mac = game_info.get('playtime_mac_forever')
+        self.app_linux = game_info.get('playtime_linux_forever')
+
+    @staticmethod
+    def in_game(minutes: int) -> str:
+        return f'{minutes // 60}:{minutes % 60}'
 
 

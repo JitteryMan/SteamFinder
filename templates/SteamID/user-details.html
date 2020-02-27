@@ -19,15 +19,18 @@
     <p>appid = {{ user.in_game }}</p>
     <p>serverip = {{ user.serverip }}</p>
     <p>game info = {{ user.in_game_info }}</p>
-    <p>country = {{ user.country }}</p>
+    <p>country = {{ user.country }} <img src="https://www.countryflags.io/{{ user.country }}/shiny/24.png"></p>
     <p>level = {{ user.level }}</p>
-    <p>level = {{ user.get_visibility }}</p>
+    <p>visible = {{ user.get_visibility }}</p>
 
     <progress max="{{ user.progress_max }}" value="{{ user.progress_curr }}">need {{ user.need_xp }}</progress>
 
     {% for friend in user.friends %}
-        <a href="{% url 'SteamID:user_detail' friend.steam_id %}">{{ friend }}</a>
+        <p><img src="{{ friend.avatar_mini }}"> <a href="{% url 'SteamID:user_detail' friend.steam_id %}">{{ friend }}</a></p>
     {% endfor %}
-
+    <hr>
+    {% for game in user.games %}
+        <p><img src="{{ game.app_icon }}"> {{ game.app_name }}</p>
+    {% endfor %}
 
 {% endblock %}
