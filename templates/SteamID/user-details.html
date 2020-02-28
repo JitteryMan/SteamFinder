@@ -22,6 +22,12 @@
     <p>country = {{ user.country }} <img src="https://www.countryflags.io/{{ user.country }}/shiny/24.png"></p>
     <p>level = {{ user.level }}</p>
     <p>visible = {{ user.get_visibility }}</p>
+    <p>ban_community = {{ user.ban_community }}</p>
+    <p>VAC = {{ user.ban_VAC }}</p>
+    <p>VAC_count = {{ user.ban_VAC_count }}</p>
+    <p>ban_last = {{ user.days_to_ymd }}</p>
+    <p>ban_game = {{ user.ban_game }}</p>
+    <p>ban_economy = {{ user.ban_economy }}</p>
 
     <progress max="{{ user.progress_max }}" value="{{ user.progress_curr }}">need {{ user.need_xp }}</progress>
 

@@ -70,7 +70,7 @@ class SteamAPI:
         query = f'''IPlayerService/GetOwnedGames/v1/?key={self.TOKEN}&steamid={steam_id
                 }&include_appinfo=true&include_played_free_games=true'''
         response = self._get_json(query)
-        return response
+        return response.get('response').get('games')
 
 
 def get_steamid_from_url(url: str):

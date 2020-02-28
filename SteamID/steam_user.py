@@ -1,5 +1,7 @@
 from datetime import datetime
 from .steam_api import APP_MEDIA
+from .models import User
+
 
 def unix_to_default(unix_date):
     return datetime.utcfromtimestamp(unix_date) if unix_date else None
@@ -45,14 +47,20 @@ class SteamUser:
         self.ban_community = steam_data.get('ban').get('CommunityBanned')
         self.ban_VAC = steam_data.get('ban').get('VACBanned')
         self.ban_VAC_count = steam_data.get('ban').get('NumberOfVACBans')
-        self.ban_last = unix_to_default(steam_data.get('ban').get('DaysSinceLastBan'))
+        self.ban_last = steam_data.get('ban').get('DaysSinceLastBan')
         self.ban_game = steam_data.get('ban').get('NumberOfGameBans')
         self.ban_economy = steam_data.get('ban').get('EconomyBan')
-
-        # todo поскольку это базовый класс, то может и его записывать в БД, хз
+        self._to_db()
 
     def __str__(self):
         return self.nick
+
+    def _to_db(self):
+        User.objects.update_or_create(steam_id=self.steam_id, defaults={'steam_id': self.steam_id, 'nick': self.nick,
+            'url': self.url, 'avatar_logo': self.avatar_mini, 'avatar': self.avatar_big, 'comment': self.comment,
+            'realname': self.realname, 'created': self.created, 'country': self.country,
+            'ban_community': self.ban_community, 'ban_VAC': self.ban_VAC, 'ban_VAC_count': self.ban_VAC_count,
+            'ban_games': self.ban_game, 'ban_economy': self.ban_economy})
 
     def get_status(self):
         state = ('Offline', 'Online', 'Busy', 'Away', 'Snooze', 'looking to trade', 'looking to play')
@@ -61,6 +69,12 @@ class SteamUser:
     def get_visibility(self):
         state = (None, 'Private', 'Friends only', 'Public')
         return state[self.visibility]
+
+    def days_to_ymd(self):
+        years = self.ban_last // 365
+        month = round(self.ban_last % 365 // 30.42)
+        days = round(self.ban_last % 365 % 30.42)
+        return f'{years}y {month}m {days}d'
 
 
 class FriendUser(SteamUser):
@@ -74,26 +88,33 @@ class FriendUser(SteamUser):
 class SteamUserAdv(SteamUser):
     def friends_all(self, friends: list):
         self.friends = []
-        for friend in friends:
-            friend_user = FriendUser(friend.get('details'))
-            friend_user.set_relationship(friend.get('relationship'))
-            friend_user.set_friend_date(friend.get('friend_since'))
-            self.friends.append(friend_user)
+        if friends:
+            for friend in friends:
+                friend_user = FriendUser(friend.get('details'))
+                friend_user.set_relationship(friend.get('relationship'))
+                friend_user.set_friend_date(friend.get('friend_since'))
+                self.friends.append(friend_user)
 
     def set_badges(self, badges: dict):
+        # not used yet
         self.badges = badges.get('response').get('badges')
         self.level = badges.get('response').get('player_level')
         self.need_xp = badges.get('response').get('player_xp_needed_to_level_up')
         self.xp = badges.get('response').get('player_xp')
         self.xp_curr_lvl = badges.get('response').get('player_xp_needed_current_level')
-        self.progress_max = self.xp + self.need_xp - self.xp_curr_lvl
-        self.progress_curr = self.xp - self.xp_curr_lvl
+        try:
+            self.progress_max = self.xp + self.need_xp - self.xp_curr_lvl
+            self.progress_curr = self.xp - self.xp_curr_lvl
+        except TypeError as err:
+            self.progress_max = 0
+            self.progress_curr = 0
+            print(err)
 
     def set_games(self, games: dict):
-        self.games_count = games.get('response').get('game_count')
         self.games = []
-        for game in games['response']['games']:
-            self.games.append(Games(game))
+        if games:
+            for game in games:
+                self.games.append(Games(game))
 
 
 class Games:
