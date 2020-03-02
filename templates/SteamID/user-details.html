@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block content %}
+    {% include 'SteamID/searchbox.html' %}
+
     <img src="{{ user.avatar_big }}">
     <p>steam id = {{ user.steam_id }}</p>
     <p>nick = {{ user.nick }}</p>
@@ -36,7 +38,7 @@
     {% endfor %}
     <hr>
     {% for game in user.games %}
-        <p><img src="{{ game.app_icon }}"> {{ game.app_name }}</p>
+        <p><img src="{{ game.app_icon }}"> <a href="https://store.steampowered.com/app/{{ game.app_id }}/"> {{ game.app_name }}</a></p>
     {% endfor %}
 
 {% endblock %}

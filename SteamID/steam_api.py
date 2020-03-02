@@ -1,7 +1,6 @@
 # STEAM WEB API. Created by JitteryMan
 import re
 import requests
-from requests import HTTPError
 
 URL = 'http://api.steampowered.com/'
 APP_MEDIA = 'http://media.steampowered.com/steamcommunity/public/images/apps/'
@@ -17,7 +16,7 @@ class SteamAPI:
         response = {}
         try:
             response = requests.get(URL + query)
-        except HTTPError as err:
+        except requests.exceptions.RequestException as err:
             print(f'Error {err}')
         return response.json()
 
@@ -76,9 +75,10 @@ class SteamAPI:
 def get_steamid_from_url(url: str):
     """ FIND STEAMID FROM HTML PAGE AND RETURN IT """
     try:
+        res = None
         response = requests.get(url)
         res = re.search(r'(?<="steamid":")[0-9]+', response.text)
-    except HTTPError as err:
+    except requests.exceptions.RequestException as err:
         print(f'Error {err}')
     return res.group(0) if res else None
 

@@ -1,3 +1,53 @@
 body{
-    background-color: #9b9b9b;
+    background: url("../images/background.jpg") repeat #171a21;
+}
+
+h1{
+    /*font-family: 'Caveat', sans-serif;*/
+    font-family: 'Pangolin', sans-serif;
+    color: #b8b6b4;
+    margin-bottom: -10px;
+}
+
+/*----- TEMPLATE -----*/
+#container{
+    margin-top: 20px;
+}
+
+.align-content-center{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    background: #1b2838;
+    height: 100%;
+    opacity: 0.9;
+}
+
+.content{
+    padding: 10px;
+}
+
+
+/*----- SEARCHBOX -----*/
+input#search {
+    float: left;
+    font-size: 20px;
+    border-radius: 5px;
+    width: 60%;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.2);
+    background-color: #316282;
+    padding: 2px 6px;
+}
+
+input.search-btn {
+    background: url("../images/search_icon_btn.png");
+    float: left;
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    margin: 2px 0 0 -27px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    cursor: pointer;
 }
