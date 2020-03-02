@@ -8,11 +8,12 @@
     {% load static %}
     <link type="text/css" rel="stylesheet" href="{% static 'SteamID/css/template.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Caveat|Pangolin&display=swap&subset=cyrillic" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="{% static "SteamID/images/steam.ico" %}">
 </head>
 <body>
     <div id="container">
         <div class="align-content-center">
-            <h1>Steam user Finder</h1>
+            <h1><a href="/">Steam user Finder</a></h1>
             <div class="content">
                 {% include 'SteamID/searchbox.html' %}
                 {% block content %}
