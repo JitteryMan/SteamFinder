@@ -1,12 +1,15 @@
 body{
     background: url("../images/background.jpg") repeat #171a21;
+    color:#8F98A0;
 }
 
 h1{
-    /*font-family: 'Caveat', sans-serif;*/
     font-family: 'Pangolin', sans-serif;
-    color: #b8b6b4;
-    margin-bottom: -10px;
+    color: #fff;
+    font-size: 3em;
+    margin: -5px;
+    padding: 20px;
+    text-shadow: 0 0 25px #fff;
 }
 
 /*----- TEMPLATE -----*/
@@ -29,11 +32,16 @@ h1{
 
 
 /*----- SEARCHBOX -----*/
-input#search {
+.box-left{
     float: left;
+    width: 60%;
+}
+
+input#search {
     font-size: 20px;
     border-radius: 5px;
-    width: 60%;
+    width: 100%;
+    float: left;
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.3);
     box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.2);
@@ -43,11 +51,26 @@ input#search {
 
 input.search-btn {
     background: url("../images/search_icon_btn.png");
-    float: left;
     width: 25px;
     height: 25px;
     border-radius: 3px;
-    margin: 2px 0 0 -27px;
+    margin: 2px 0 0 -29px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     cursor: pointer;
+}
+
+.info-block{
+    font-family: 'Caveat', sans-serif;
+    font-size: 1.6em;
+    display:inline-block;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    padding:0 10px;
+    line-height:1.5em;
+    background:#171a21;
+    border:solid 5px #717171;
+    margin-bottom: 1em;
+}
+
+.info-block p{
+    margin: 5px;
 }

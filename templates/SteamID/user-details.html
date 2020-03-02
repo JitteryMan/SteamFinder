@@ -1,11 +1,10 @@
 {% extends 'SteamID/Template.html' %}
 
 {% block title %}
-    {{ user.nick }} - Steam Finder
+    {{ user.nick }} - Steam User Finder
 {% endblock %}
 
 {% block content %}
-    {% include 'SteamID/searchbox.html' %}
 
     <img src="{{ user.avatar_big }}">
     <p>steam id = {{ user.steam_id }}</p>

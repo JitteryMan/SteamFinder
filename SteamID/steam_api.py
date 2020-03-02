@@ -74,10 +74,12 @@ class SteamAPI:
 
 def get_steamid_from_url(url: str):
     """ FIND STEAMID FROM HTML PAGE AND RETURN IT """
+    res = None
     try:
-        res = None
-        response = requests.get(url)
-        res = re.search(r'(?<="steamid":")[0-9]+', response.text)
+        is_steam = re.search(r'^https://steamcommunity.com/', url)
+        if is_steam:
+            response = requests.get(url)
+            res = re.search(r'(?<="steamid":")[0-9]+', response.text)
     except requests.exceptions.RequestException as err:
         print(f'Error {err}')
     return res.group(0) if res else None

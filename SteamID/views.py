@@ -8,22 +8,25 @@ from .steam_user import SteamUserAdv
 
 
 def index(request):
-    sid = request.GET.get('steam')
-    if sid:
-        if not sid.isnumeric():
-            user = User.objects.filter(url=sid)
-            if user:
-                sid = user[0].steam_id
-            else:
-                sid = get_steamid_from_url(sid)
-        return HttpResponseRedirect(reverse('SteamID:user_detail', args=(sid, )))
+    return render(request, 'SteamID/HomePage.html')
+
+
+def search(request, find):
+    if 'steam' in request.GET:
+        find = request.GET.get('steam')
+        if not find.isnumeric():
+            user = User.objects.filter(url=find)
+            find = user[0].steam_id if user else get_steamid_from_url(find.lower())
+    if find.isnumeric():
+        return HttpResponseRedirect(reverse('SteamID:user_detail', args=(find,)))
     else:
-        return render(request, 'SteamID/HomePage.html')
+        return render(request, 'SteamID/Error-page.html')
+
 
 
 def user_detail(request, steam_id):
     user = None
-    if steam_id.isnumeric():
+    if type(steam_id) == int:
         steam = SteamAPI(TOKEN=STEAM_API_KEY)
         bans = steam.get_users_with_bans(steam_id)
         if bans:
