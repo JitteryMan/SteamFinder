@@ -4,7 +4,7 @@ body{
 }
 
 h1{
-    font-family: 'Pangolin', sans-serif;
+    font-family: 'Gabriela', sans-serif;
     font-size: 3em;
     margin: -5px;
     padding: 20px;
@@ -113,7 +113,7 @@ input#search-btn {
 	align-items: center;
 	height:100%;
 	margin: auto;
-	font-family: 'Pangolin', sans-serif;
+	font-family: 'Gabriela', sans-serif;
     font-size: 3em;
 	animation: load 1.2s infinite 0s ease-in-out;
 	animation-direction: alternate;

@@ -5,11 +5,15 @@
 {% endblock %}
 
 {% block content %}
+    <div>
+        <img src="{{ user.avatar_big }}">
+        <p>steam id = {{ user.steam_id }}</p>
+        <p>nick = {{ user.nick }}</p>
+        <p>url = {{ user.url }}</p>
+    </div>
 
-    <img src="{{ user.avatar_big }}">
-    <p>steam id = {{ user.steam_id }}</p>
-    <p>nick = {{ user.nick }}</p>
-    <p>url = {{ user.url }}</p>
+
+
     <p>avatar = {{ user.avatar_mini }}</p>
     <p>status = {{ user.get_status }}</p>
     <p>comment = {{ user.comment }}</p>
