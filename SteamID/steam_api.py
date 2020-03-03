@@ -17,7 +17,7 @@ class SteamAPI:
         try:
             response = requests.get(URL + query)
         except requests.exceptions.RequestException as err:
-            print(f'Error {err}')
+            raise err
         return response.json()
 
     def get_users(self, steam_ids: str) -> list:
@@ -81,7 +81,7 @@ def get_steamid_from_url(url: str):
             response = requests.get(url)
             res = re.search(r'(?<="steamid":")[0-9]+', response.text)
     except requests.exceptions.RequestException as err:
-        print(f'Error {err}')
+        raise err
     return res.group(0) if res else None
 
 

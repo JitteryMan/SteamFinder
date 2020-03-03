@@ -102,13 +102,6 @@ class SteamUserAdv(SteamUser):
         self.need_xp = badges.get('response').get('player_xp_needed_to_level_up')
         self.xp = badges.get('response').get('player_xp')
         self.xp_curr_lvl = badges.get('response').get('player_xp_needed_current_level')
-        try:
-            self.progress_max = self.xp + self.need_xp - self.xp_curr_lvl
-            self.progress_curr = self.xp - self.xp_curr_lvl
-        except TypeError as err:
-            self.progress_max = 0
-            self.progress_curr = 0
-            print(err)
 
     def set_games(self, games: dict):
         self.games = []

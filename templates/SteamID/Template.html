@@ -9,12 +9,36 @@
     <link type="text/css" rel="stylesheet" href="{% static 'SteamID/css/template.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Caveat|Pangolin&display=swap&subset=cyrillic" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="{% static "SteamID/images/steam.ico" %}">
+    <script src="{% static 'SteamID/js/jquery-3.4.1.min.js' %}"></script>
+
 </head>
 <body>
+<script>
+      $(window).on("load",function(){
+         $(".loader-wrapper").fadeOut("slow");
+      });
+      $(document).ready(function(){
+          $("#search-btn").click(function(){
+            if($("#search").val().length >= 1) {
+                $(".loader-wrapper").show();
+            }
+          });
+          $(".usr-id").click(function(){
+                $(".loader-wrapper").show();
+          });
+      });
+</script>
+
+
     <div id="container">
         <div class="align-content-center">
             <h1><a href="/">Steam user Finder</a></h1>
             <div class="content">
+
+            <div class="loader-wrapper">
+                <h2 class="animate">Loading data. Please wait...</h2>
+            </div>
+
                 {% include 'SteamID/searchbox.html' %}
                 {% block content %}
 

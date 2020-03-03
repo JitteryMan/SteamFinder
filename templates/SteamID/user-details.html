@@ -29,11 +29,12 @@
     <p>ban_last = {{ user.days_to_ymd }}</p>
     <p>ban_game = {{ user.ban_game }}</p>
     <p>ban_economy = {{ user.ban_economy }}</p>
+    <p>badges = {{ user.badges|length }}</p>
 
     <progress max="{{ user.progress_max }}" value="{{ user.progress_curr }}">need {{ user.need_xp }}</progress>
 
     {% for friend in user.friends %}
-        <p><img src="{{ friend.avatar_mini }}"> <a href="{% url 'SteamID:user_detail' friend.steam_id %}">{{ friend }}</a></p>
+        <p><img src="{{ friend.avatar_mini }}"> <a class="usr-id" href="{% url 'SteamID:user_detail' friend.steam_id %}">{{ friend }}</a></p>
     {% endfor %}
     <hr>
     {% for game in user.games %}
