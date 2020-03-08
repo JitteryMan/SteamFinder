@@ -4,45 +4,125 @@
     {{ user.nick }} - Steam User Finder
 {% endblock %}
 
+{% load static %}
 {% block content %}
-    <div>
-        <img src="{{ user.avatar_big }}">
-        <p>steam id = {{ user.steam_id }}</p>
-        <p>nick = {{ user.nick }}</p>
-        <p>url = {{ user.url }}</p>
+    <div id="avatar-content">
+        <div class="avatar-logo">
+            <img src="{{ user.avatar_big }}">
+            <a href="steam://friends/add/{{ user.steam_id }}">
+                <img class="user-add" src="{% static 'SteamID/images/user.png' %}" title="Add to friend">
+            </a><br>
+            <div class="avatar-data">
+                <table class="table-data">
+                    <tr>
+                        <td>VAC ban</td>
+                        <td class="table-value">{{ user.ban_VAC }}</td>
+                    </tr>
+                    <tr>
+                        <td>VAC ban count</td>
+                        <td class="table-value">{{ user.ban_VAC_count }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ban community</td>
+                        <td class="table-value">{{ user.ban_community }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ban games</td>
+                        <td class="table-value">{{ user.ban_game }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ban economy</td>
+                        <td class="table-value">{{ user.ban_economy }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ban last</td>
+                        <td class="table-value">{{ user.ban_last }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <h2>{{ user.nick }}</h2>
+        <div class="avatar-data">
+            <table class="table-data">
+                <tr>
+                    <td>SteamID</td>
+                    <td class="table-value">{{ user.steam_id }}</td>
+                </tr>
+                <tr>
+                    <td>URL</td>
+                    <td class="table-value"><a href="{{ user.url }}" title="Go to profile" target="_blank"> {{ user.url }} </a></td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td class="table-value">
+                        {% if user.state == 1 %}
+                            <span style="color: #7FA94F">
+                        {% elif user.state == 2 %}
+                            <span style="color: #516fa9">
+                        {% else %}
+                            <span>
+                        {% endif %}
+                        {{ user.get_status }}</span></td>
+                </tr>
+                <tr>
+                    <td>Real Name</td>
+                    <td class="table-value">{{ user.realname }}</td>
+                </tr>
+                <tr>
+                    <td>Created</td>
+                    <td class="table-value">{{ user.created }}</td>
+                </tr>
+                <tr>
+                    <td>LogOff</td>
+                    <td class="table-value">{{ user.logoff }}</td>
+                </tr>
+                <tr>
+                    <td>Game Info</td>
+                    <td class="table-value">
+                        {% if user.in_game_info %}
+                            <span style="color: #7FA94F">
+                        {% else %}
+                            <span>
+                        {% endif %}
+                        {{ user.in_game_info }}</span></td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td class="table-value"><img src="https://www.countryflags.io/{{ user.country }}/shiny/32.png"
+                                                 title="{{ user.country }}"></td>
+                </tr>
+                <tr>
+                    <td>Visible</td>
+                    <td class="table-value">{{ user.get_visibility }}</td>
+                </tr>
+                <tr>
+                    <td>Level</td>
+                    <td class="table-value">{{ user.level }}</td>
+                </tr>
+                <tr>
+                    <td>Experience</td>
+                    <td class="table-value">{{ user.xp }}/{{ user.progress_max }}</td>
+                </tr>
+            </table>
+        </div>
+        <div style="clear: both"></div>
     </div>
 
 
+    {#    <progress max="{{ user.progress_max }}" value="{{ user.xp }}"></progress>#}
 
-    <p>avatar = {{ user.avatar_mini }}</p>
-    <p>status = {{ user.get_status }}</p>
-    <p>comment = {{ user.comment }}</p>
-    <p>realname = {{ user.realname }}</p>
-    <p>clanid = {{ user.clanid }}</p>
-    <p>logoff = {{ user.logoff }}</p>
-    <p>created = {{ user.created }}</p>
-    <p>appid = {{ user.in_game }}</p>
-    <p>serverip = {{ user.serverip }}</p>
-    <p>game info = {{ user.in_game_info }}</p>
-    <p>country = {{ user.country }} <img src="https://www.countryflags.io/{{ user.country }}/shiny/24.png"></p>
-    <p>level = {{ user.level }}</p>
-    <p>visible = {{ user.get_visibility }}</p>
-    <p>ban_community = {{ user.ban_community }}</p>
-    <p>VAC = {{ user.ban_VAC }}</p>
-    <p>VAC_count = {{ user.ban_VAC_count }}</p>
-    <p>ban_last = {{ user.days_to_ymd }}</p>
-    <p>ban_game = {{ user.ban_game }}</p>
-    <p>ban_economy = {{ user.ban_economy }}</p>
-    <p>badges = {{ user.badges|length }}</p>
+    {#    {% for friend in user.friends %}#}
+    {#        <p><img src="{{ friend.avatar_mini }}"> <a class="usr-id"#}
+    {#                                                   href="{% url 'SteamID:user_detail' friend.steam_id %}">{{ friend }}</a>#}
+    {#        </p>#}
+    {#    {% endfor %}#}
+    {#    <hr>#}
+    {#    {% for game in user.games %}#}
+    {#        <p><img src="{{ game.app_icon }}"> <a#}
+    {#                href="https://store.steampowered.com/app/{{ game.app_id }}/"> {{ game.app_name }}</a></p>#}
+    {#    {% endfor %}#}
 
-    <progress max="{{ user.progress_max }}" value="{{ user.progress_curr }}">need {{ user.need_xp }}</progress>
 
-    {% for friend in user.friends %}
-        <p><img src="{{ friend.avatar_mini }}"> <a class="usr-id" href="{% url 'SteamID:user_detail' friend.steam_id %}">{{ friend }}</a></p>
-    {% endfor %}
-    <hr>
-    {% for game in user.games %}
-        <p><img src="{{ game.app_icon }}"> <a href="https://store.steampowered.com/app/{{ game.app_id }}/"> {{ game.app_name }}</a></p>
-    {% endfor %}
+    {% include 'SteamID/UserFriends.html' %}
 
 {% endblock %}

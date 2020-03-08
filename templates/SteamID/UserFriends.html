@@ -1,0 +1,52 @@
+<div class="tabs-line">
+    {% for friends_stack in user.friends %}
+        <button class="tablinks"
+                onclick="openLink(event, 'tabid_{{ forloop.counter0 }}')">{{ forloop.counter }}</button>
+    {% endfor %}
+</div>
+
+{% load static %}
+
+
+<div>
+    {% for friends_stack in user.friends %}
+        <div id="tabid_{{ forloop.counter0 }}" class="tab-friend" style="display:none">
+            <table class="table-data" style="width: 100%">
+                {% for friend in friends_stack %}
+                    <tr>
+                        <td><a href="steam://friends/add/{{ user.steam_id }}">
+                            <img class="user-add" src="{% static 'SteamID/images/user.png' %}"
+                                 title="Add to friend">
+                        </a></td>
+                        <td class="table-value"><img src="{{ friend.avatar_mini }}"></td>
+                        <td class="table-value"><a class="usr-id"
+                                                   href="{% url 'SteamID:search' friend.steam_id %}">{{ friend.nick }}</a>
+                        </td>
+                        <td class="table-value">{{ friend.get_status }}</td>
+                        <td class="table-value">{% if friend.in_game %}
+                            <span style="color: #7FA94F">{{ friend.in_game_info }}</span>{% endif %}</td>
+                        <td class="table-value">{{ friend.relationship }} from {{ friend.friend_date|date:"d.m.Y" }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endfor %}
+
+</div>
+
+<script>
+    function openLink(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-friend");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+

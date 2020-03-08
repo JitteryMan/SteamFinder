@@ -94,20 +94,24 @@ class SteamUserAdv(SteamUser):
                 friend_user.set_relationship(friend.get('relationship'))
                 friend_user.set_friend_date(friend.get('friend_since'))
                 self.friends.append(friend_user)
+            self.friends = [self.friends[i:i + 20] for i in range(0, len(self.friends), 20)]
 
     def set_badges(self, badges: dict):
-        # not used yet
         self.badges = badges.get('response').get('badges')
         self.level = badges.get('response').get('player_level')
         self.need_xp = badges.get('response').get('player_xp_needed_to_level_up')
         self.xp = badges.get('response').get('player_xp')
         self.xp_curr_lvl = badges.get('response').get('player_xp_needed_current_level')
+        if self.xp:
+            self.progress_max = self.xp + self.need_xp
+
 
     def set_games(self, games: dict):
         self.games = []
         if games:
             for game in games:
                 self.games.append(Games(game))
+            self.games = [self.games[i:i + 20] for i in range(0, len(self.games), 20)]
 
 
 class Games:

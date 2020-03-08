@@ -33,7 +33,7 @@ def user_detail(request, steam_id):
             if user.visibility == 3:
                 user.set_badges(steam.get_badges(steam_id))
                 user.friends_all(steam.get_friends_as_users(steam_id))
-                user.set_games(steam.get_owned_games(steam_id))
+            #     user.set_games(steam.get_owned_games(steam_id))
         else:
             return render(request, 'SteamID/Error-page.html')
     return render(request, 'SteamID/user-details.html', {'user': user})
