@@ -4,6 +4,7 @@ import requests
 
 URL = 'http://api.steampowered.com/'
 APP_MEDIA = 'http://media.steampowered.com/steamcommunity/public/images/apps/'
+APP_URL = 'https://store.steampowered.com/app/'
 
 
 class SteamAPI:

@@ -10,11 +10,11 @@
 
 <div>
     {% for friends_stack in user.friends %}
-        <div id="tabid_{{ forloop.counter0 }}" class="tab-friend" style="display:none">
+        <div id="tabid_{{ forloop.counter0 }}" class="inline-group" style="display:none">
             <table class="table-data" style="width: 100%">
                 {% for friend in friends_stack %}
                     <tr>
-                        <td><a href="steam://friends/add/{{ user.steam_id }}">
+                        <td><a href="steam://friends/add/{{ friend.steam_id }}">
                             <img class="user-add" src="{% static 'SteamID/images/user.png' %}"
                                  title="Add to friend">
                         </a></td>
@@ -26,6 +26,7 @@
                         <td class="table-value">{% if friend.in_game %}
                             <span style="color: #7FA94F">{{ friend.in_game_info }}</span>{% endif %}</td>
                         <td class="table-value">{{ friend.relationship }} from {{ friend.friend_date|date:"d.m.Y" }}</td>
+                        <td class="table-value">{{ friend.ban_VAC_count }}</td>
                     </tr>
                 {% endfor %}
             </table>
@@ -34,19 +35,5 @@
 
 </div>
 
-<script>
-    function openLink(evt, cityName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab-friend");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-</script>
+{% include 'SteamID/tables/script_table.html' %}
 

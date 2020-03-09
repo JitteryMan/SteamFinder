@@ -1,5 +1,5 @@
 from datetime import datetime
-from .steam_api import APP_MEDIA
+from .steam_api import APP_MEDIA, APP_URL
 from .models import User
 
 
@@ -111,20 +111,21 @@ class SteamUserAdv(SteamUser):
         if games:
             for game in games:
                 self.games.append(Games(game))
-            self.games = [self.games[i:i + 20] for i in range(0, len(self.games), 20)]
+            self.games = [self.games[i:i + 50] for i in range(0, len(self.games), 50)]
 
 
 class Games:
     def __init__(self, game_info: dict):
         self.app_id = game_info.get('appid')
         self.app_name = game_info.get('name')
-        self.app_play_time = game_info.get('playtime_forever')
+        self.app_play_time = self.in_game(game_info.get('playtime_forever'))
         self.app_icon = f'{APP_MEDIA}{self.app_id}/{game_info.get("img_icon_url")}.jpg'
         self.app_logo = f'{APP_MEDIA}{self.app_id}/{game_info.get("img_logo_url")}.jpg'
+        self.app_url = f'{APP_URL}{self.app_id}'
         self.app_visible = game_info.get('has_community_visible_stats')
-        self.app_windows = game_info.get('playtime_windows_forever')
-        self.app_mac = game_info.get('playtime_mac_forever')
-        self.app_linux = game_info.get('playtime_linux_forever')
+        self.app_windows = self.in_game(game_info.get('playtime_windows_forever'))
+        self.app_mac = self.in_game(game_info.get('playtime_mac_forever'))
+        self.app_linux = self.in_game(game_info.get('playtime_linux_forever'))
 
     @staticmethod
     def in_game(minutes: int) -> str:

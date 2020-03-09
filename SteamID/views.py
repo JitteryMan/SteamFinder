@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.utils.translation import gettext as _
 from keys import STEAM_API_KEY
 from .models import User
 from .steam_api import get_steamid_from_url, SteamAPI
@@ -33,7 +34,7 @@ def user_detail(request, steam_id):
             if user.visibility == 3:
                 user.set_badges(steam.get_badges(steam_id))
                 user.friends_all(steam.get_friends_as_users(steam_id))
-            #     user.set_games(steam.get_owned_games(steam_id))
+                user.set_games(steam.get_owned_games(steam_id))
         else:
             return render(request, 'SteamID/Error-page.html')
     return render(request, 'SteamID/user-details.html', {'user': user})

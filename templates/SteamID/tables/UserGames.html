@@ -1,0 +1,31 @@
+<div class="tabs-line">
+    {% for game_stack in user.games %}
+        <button class="tablinks"
+                onclick="openLink(event, 'gtabid_{{ forloop.counter0 }}')">{{ forloop.counter }}</button>
+    {% endfor %}
+</div>
+
+{% load static %}
+
+<div>
+    {% for game_stack in user.games %}
+        <div id="gtabid_{{ forloop.counter0 }}" class="inline-group" style="display:none">
+            <table class="table-data" style="width: 100%">
+                {% for game in game_stack %}
+                    <tr>
+                        <td><a href="{{ game.app_url }}"><img src="{{ game.app_logo }}"></a> </td>
+                        <td class="table-value"><a href="{{ game.app_url }}">{{ game.app_name }}</a></td>
+                        <td class="table-value">{{ game.app_play_time }}</td>
+                        <td class="table-value">{{ game.app_windows }}</td>
+                        <td class="table-value">{{ game.app_mac }}</td>
+                        <td class="table-value">{{ game.app_linux }}</td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endfor %}
+
+</div>
+
+{% include 'SteamID/tables/script_table.html' %}
