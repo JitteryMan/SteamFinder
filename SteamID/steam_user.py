@@ -74,7 +74,10 @@ class SteamUser:
         years = self.ban_last // 365
         month = round(self.ban_last % 365 // 30.42)
         days = round(self.ban_last % 365 % 30.42)
-        return f'{years}y {month}m {days}d'
+        s = str(years) + 'y' if years else ''
+        s += str(month) + 'm' if month else ''
+        s += str(days) + 'd'
+        return s
 
 
 class FriendUser(SteamUser):
@@ -129,6 +132,6 @@ class Games:
 
     @staticmethod
     def in_game(minutes: int) -> str:
-        return f'{minutes // 60}:{minutes % 60}'
+        return f'{minutes // 60}.{minutes % 60}'
 
 

@@ -4,7 +4,10 @@
     {{ user.nick }} - Steam User Finder
 {% endblock %}
 
+
 {% load static %}
+{% load i18n %}
+
 {% block content %}
     <div id="avatar-content">
         <div class="avatar-logo">
@@ -15,27 +18,27 @@
             <div class="avatar-data">
                 <table class="table-data">
                     <tr>
-                        <td>VAC ban</td>
-                        <td class="table-value">{{ user.ban_VAC }}</td>
+                        <td>{% trans VAC ban %}</td>
+                        <td class="table-value">{{ user.ban_VAC |yesno:"+,-" }}</td>
                     </tr>
                     <tr>
-                        <td>VAC ban count</td>
+                        <td>{% trans VAC ban count %}</td>
                         <td class="table-value">{{ user.ban_VAC_count }}</td>
                     </tr>
                     <tr>
-                        <td>Ban community</td>
+                        <td>{% trans Ban community %}</td>
                         <td class="table-value">{{ user.ban_community }}</td>
                     </tr>
                     <tr>
-                        <td>Ban games</td>
+                        <td>{% trans Ban games %}</td>
                         <td class="table-value">{{ user.ban_game }}</td>
                     </tr>
                     <tr>
-                        <td>Ban economy</td>
-                        <td class="table-value">{{ user.ban_economy }}</td>
+                        <td>{% trans Ban economy %}</td>
+                        <td class="table-value">{{ user.ban_economy|default_if_none:"-" }}</td>
                     </tr>
                     <tr>
-                        <td>Ban last</td>
+                        <td>{% trans Ban last %}</td>
                         <td class="table-value">{{ user.ban_last }}</td>
                     </tr>
                 </table>
@@ -53,7 +56,7 @@
                     <td class="table-value"><a href="{{ user.url }}" title="Go to profile" target="_blank"> {{ user.url }} </a></td>
                 </tr>
                 <tr>
-                    <td>Status</td>
+                    <td>{% trans Status %}</td>
                     <td class="table-value">
                         {% if user.state == 1 %}
                             <span style="color: #7FA94F">
@@ -65,62 +68,52 @@
                         {{ user.get_status }}</span></td>
                 </tr>
                 <tr>
-                    <td>Real Name</td>
-                    <td class="table-value">{{ user.realname }}</td>
+                    <td>{% trans Real Name %}</td>
+                    <td class="table-value">{{ user.realname|default_if_none:"-" }}</td>
                 </tr>
                 <tr>
-                    <td>Created</td>
-                    <td class="table-value">{{ user.created }}</td>
+                    <td>{% trans Created %}</td>
+                    <td class="table-value">{{ user.created|default_if_none:"-" }}</td>
                 </tr>
                 <tr>
-                    <td>LogOff</td>
-                    <td class="table-value">{{ user.logoff }}</td>
+                    <td>{% trans LogOff %}</td>
+                    <td class="table-value">{{ user.logoff|default_if_none:"-" }}</td>
                 </tr>
                 <tr>
-                    <td>Game Info</td>
+                    <td>{% trans Game Info %}</td>
                     <td class="table-value">
                         {% if user.in_game_info %}
                             <span style="color: #7FA94F">
                         {% else %}
                             <span>
                         {% endif %}
-                        {{ user.in_game_info }}</span></td>
+                        {{ user.in_game_info|default_if_none:"-" }}</span></td>
                 </tr>
                 <tr>
-                    <td>Country</td>
-                    <td class="table-value"><img src="https://www.countryflags.io/{{ user.country }}/shiny/32.png"
-                                                 title="{{ user.country }}"></td>
+                    <td>{% trans Country %}</td>
+                    <td class="table-value">
+                        {% if user.country %}
+                        <img src="https://www.countryflags.io/{{ user.country }}/shiny/32.png"
+                                                 title="{{ user.country }}">
+                        {% endif %}
+                    </td>
                 </tr>
                 <tr>
-                    <td>Visible</td>
+                    <td>{% trans Visible %}</td>
                     <td class="table-value">{{ user.get_visibility }}</td>
                 </tr>
                 <tr>
-                    <td>Level</td>
-                    <td class="table-value">{{ user.level }}</td>
+                    <td>{% trans Level %}</td>
+                    <td class="table-value">{{ user.level|default_if_none:"-" }}</td>
                 </tr>
                 <tr>
-                    <td>Experience</td>
-                    <td class="table-value">{{ user.xp }}/{{ user.progress_max }}</td>
+                    <td>{% trans Experience %}</td>
+                    <td class="table-value">{{ user.xp|default_if_none:"-" }}/{{ user.progress_max|default_if_none:"-" }}</td>
                 </tr>
             </table>
         </div>
         <div style="clear: both"></div>
     </div>
-
-
-    {#    <progress max="{{ user.progress_max }}" value="{{ user.xp }}"></progress>#}
-
-    {#    {% for friend in user.friends %}#}
-    {#        <p><img src="{{ friend.avatar_mini }}"> <a class="usr-id"#}
-    {#                                                   href="{% url 'SteamID:user_detail' friend.steam_id %}">{{ friend }}</a>#}
-    {#        </p>#}
-    {#    {% endfor %}#}
-    {#    <hr>#}
-    {#    {% for game in user.games %}#}
-    {#        <p><img src="{{ game.app_icon }}"> <a#}
-    {#                href="https://store.steampowered.com/app/{{ game.app_id }}/"> {{ game.app_name }}</a></p>#}
-    {#    {% endfor %}#}
 
 
     {% include 'SteamID/tables/UserFriends.html' %}

@@ -1,12 +1,34 @@
 {% load i18n %}
 
+<div class="lang">
+    <form action="{% url "set_language" %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="text" value="{{ redirect_to }}">
+        <select name="language">
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as langlist %}
+            {% get_current_language as CURR_LANG %}
+            {% for language in langlist %}
+                <option value="{{ language.code }}" {% if language.code == CURR_LANG %} selected {% endif %}>
+                    {{ language.name_local }}
+                </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Go">
+    </form>
+</div>
+
 <div class="box-left">
     <div class="info-block">
-        <p>SteamID это уникальный номер используемый для идентификации аккаунта Стим. SteamID может быть конвертирован
-            в более новые steamID3 или steamID64, также связан с комьюнити ID или ID друга. С этим steamID64 можно
-            найти страницу пользователя в Steam<br>
-            Оригинальный URL - это опция, которая позволяет персонализировать страницу пользователя в сообществе Steam.
-        </p>
+        {% blocktrans %}
+            <p>SteamID это уникальный номер используемый для идентификации аккаунта Стим. SteamID может быть
+                конвертирован
+                в более новые steamID3 или steamID64, также связан с комьюнити ID или ID друга. С этим steamID64 можно
+                найти страницу пользователя в Steam<br>
+                Оригинальный URL - это опция, которая позволяет персонализировать страницу пользователя в сообществе
+                Steam.
+            </p>
+        {% endblocktrans %}
     </div>
 
     <form method="get" action="{% url 'SteamID:search' 'find_' %}" class="steamid">
