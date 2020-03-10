@@ -1,6 +1,7 @@
 from datetime import datetime
 from .steam_api import APP_MEDIA, APP_URL
 from .models import User
+from django.utils.translation import gettext_lazy as _
 
 
 def unix_to_default(unix_date):
@@ -63,20 +64,20 @@ class SteamUser:
             'ban_games': self.ban_game, 'ban_economy': self.ban_economy})
 
     def get_status(self):
-        state = ('Offline', 'Online', 'Busy', 'Away', 'Snooze', 'looking to trade', 'looking to play')
+        state = (_('Offline'), _('Online'), _('Busy'), _('Away'), _('Snooze'), _('looking to trade'), _('looking to play'))
         return state[self.state]
 
     def get_visibility(self):
-        state = (None, 'Private', 'Friends only', 'Public')
+        state = (None, _('Private'), _('Friends only'), _('Public'))
         return state[self.visibility]
 
     def days_to_ymd(self):
         years = self.ban_last // 365
         month = round(self.ban_last % 365 // 30.42)
         days = round(self.ban_last % 365 % 30.42)
-        s = str(years) + 'y' if years else ''
-        s += str(month) + 'm' if month else ''
-        s += str(days) + 'd'
+        s = str(years) + _('y') if years else ''
+        s += str(month) + _('m') if month else ''
+        s += str(days) + _('d')
         return s
 
 
@@ -132,6 +133,8 @@ class Games:
 
     @staticmethod
     def in_game(minutes: int) -> str:
-        return f'{minutes // 60}.{minutes % 60}'
+        s = f'{(minutes // 60)}{_("h")} ' if minutes // 60 > 0 else ''
+        s += f'{(minutes % 60)}{_("m")}'
+        return s
 
 

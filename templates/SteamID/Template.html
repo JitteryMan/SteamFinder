@@ -35,11 +35,29 @@
 
 <div id="container">
     <div class="align-content-center">
+
+        <div id="lang">
+            <form action="{% url "set_language" %}" method="post">
+                {% csrf_token %}
+                <select name="language" onchange='{this.form.submit(); $(".loader-wrapper").show();}'>
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as langlist %}
+                    {% get_current_language as CURR_LANG %}
+                    {% for language in langlist %}
+                        <option value="{{ language.code }}" {% if language.code == CURR_LANG %} selected {% endif %}>
+                            {{ language.name_local }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+
+
         <h1><a href="/">Steam user Finder</a></h1>
         <div class="content">
 
             <div class="loader-wrapper">
-                <h1 class="animate">{% trans "Loading data. Please wait..." %}</h1>
+                <h1 class="animate">{% trans "Loading data.<br> Please wait..." %}</h1>
             </div>
 
             {% include 'SteamID/searchbox.html' %}

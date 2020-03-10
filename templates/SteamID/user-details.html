@@ -18,27 +18,27 @@
             <div class="avatar-data">
                 <table class="table-data">
                     <tr>
-                        <td>{% trans VAC ban %}</td>
+                        <td>{% trans 'VAC ban' %}</td>
                         <td class="table-value">{{ user.ban_VAC |yesno:"+,-" }}</td>
                     </tr>
                     <tr>
-                        <td>{% trans VAC ban count %}</td>
+                        <td>{% trans 'VAC ban count' %}</td>
                         <td class="table-value">{{ user.ban_VAC_count }}</td>
                     </tr>
                     <tr>
-                        <td>{% trans Ban community %}</td>
+                        <td>{% trans 'Ban community' %}</td>
                         <td class="table-value">{{ user.ban_community }}</td>
                     </tr>
                     <tr>
-                        <td>{% trans Ban games %}</td>
+                        <td>{% trans 'Ban games' %}</td>
                         <td class="table-value">{{ user.ban_game }}</td>
                     </tr>
                     <tr>
-                        <td>{% trans Ban economy %}</td>
+                        <td>{% trans 'Ban economy' %}</td>
                         <td class="table-value">{{ user.ban_economy|default_if_none:"-" }}</td>
                     </tr>
                     <tr>
-                        <td>{% trans Ban last %}</td>
+                        <td>{% trans 'Ban last' %}</td>
                         <td class="table-value">{{ user.ban_last }}</td>
                     </tr>
                 </table>
@@ -53,10 +53,11 @@
                 </tr>
                 <tr>
                     <td>URL</td>
-                    <td class="table-value"><a href="{{ user.url }}" title="Go to profile" target="_blank"> {{ user.url }} </a></td>
+                    <td class="table-value"><a href="{{ user.url }}" title="Go to profile"
+                                               target="_blank"> {{ user.url }} </a></td>
                 </tr>
                 <tr>
-                    <td>{% trans Status %}</td>
+                    <td>{% trans 'Status' %}</td>
                     <td class="table-value">
                         {% if user.state == 1 %}
                             <span style="color: #7FA94F">
@@ -68,19 +69,19 @@
                         {{ user.get_status }}</span></td>
                 </tr>
                 <tr>
-                    <td>{% trans Real Name %}</td>
+                    <td>{% trans 'Real Name' %}</td>
                     <td class="table-value">{{ user.realname|default_if_none:"-" }}</td>
                 </tr>
                 <tr>
-                    <td>{% trans Created %}</td>
+                    <td>{% trans 'Created' %}</td>
                     <td class="table-value">{{ user.created|default_if_none:"-" }}</td>
                 </tr>
                 <tr>
-                    <td>{% trans LogOff %}</td>
+                    <td>{% trans 'LogOff' %}</td>
                     <td class="table-value">{{ user.logoff|default_if_none:"-" }}</td>
                 </tr>
                 <tr>
-                    <td>{% trans Game Info %}</td>
+                    <td>{% trans 'Game Info' %}</td>
                     <td class="table-value">
                         {% if user.in_game_info %}
                             <span style="color: #7FA94F">
@@ -90,24 +91,24 @@
                         {{ user.in_game_info|default_if_none:"-" }}</span></td>
                 </tr>
                 <tr>
-                    <td>{% trans Country %}</td>
+                    <td>{% trans 'Country' %}</td>
                     <td class="table-value">
                         {% if user.country %}
-                        <img src="https://www.countryflags.io/{{ user.country }}/shiny/32.png"
-                                                 title="{{ user.country }}">
+                            <img src="https://www.countryflags.io/{{ user.country }}/shiny/32.png"
+                                 title="{{ user.country }}">
                         {% endif %}
                     </td>
                 </tr>
                 <tr>
-                    <td>{% trans Visible %}</td>
+                    <td>{% trans 'Visible' %}</td>
                     <td class="table-value">{{ user.get_visibility }}</td>
                 </tr>
                 <tr>
-                    <td>{% trans Level %}</td>
+                    <td>{% trans 'Level' %}</td>
                     <td class="table-value">{{ user.level|default_if_none:"-" }}</td>
                 </tr>
                 <tr>
-                    <td>{% trans Experience %}</td>
+                    <td>{% trans 'Experience' %}</td>
                     <td class="table-value">{{ user.xp|default_if_none:"-" }}/{{ user.progress_max|default_if_none:"-" }}</td>
                 </tr>
             </table>
@@ -115,8 +116,15 @@
         <div style="clear: both"></div>
     </div>
 
+    {% if user.friends %}
+        <h2>{% trans "Friends" %}</h2>
+        {% include 'SteamID/tables/UserFriends.html' %}
+    {% endif %}
 
-    {% include 'SteamID/tables/UserFriends.html' %}
-    {% include 'SteamID/tables/UserGames.html' %}
+    {% if user.games %}
+        <h2>{% trans "Games" %}</h2>
+        {% include 'SteamID/tables/UserGames.html' %}
+    {% endif %}
+
 
 {% endblock %}
