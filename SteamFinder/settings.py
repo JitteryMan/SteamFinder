@@ -27,7 +27,8 @@ SECRET_KEY = DJANGO_SK
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.0.32'
+    '192.168.0.32',
+    '192.168.1.10',
 ]
 
 
@@ -109,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru-RU'
 
 LANGUAGES = [
     ('en', 'English'),

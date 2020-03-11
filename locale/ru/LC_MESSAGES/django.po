@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-10 22:07+0300\n"
+"POT-Creation-Date: 2020-03-11 21:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,55 +38,57 @@ msgstr "Вышел"
 
 #: .\SteamID\steam_user.py:67
 msgid "Snooze"
-msgstr ""
+msgstr "Спит"
 
 #: .\SteamID\steam_user.py:67
 msgid "looking to trade"
-msgstr ""
+msgstr "На торговой площадке"
 
 #: .\SteamID\steam_user.py:67
 msgid "looking to play"
-msgstr ""
+msgstr "Ищет, во что поиграть"
 
 #: .\SteamID\steam_user.py:71
 msgid "Private"
-msgstr ""
+msgstr "Приватный"
 
 #: .\SteamID\steam_user.py:71
 msgid "Friends only"
-msgstr ""
+msgstr "Только для друзей"
 
 #: .\SteamID\steam_user.py:71
 msgid "Public"
-msgstr ""
-
-#: .\SteamID\steam_user.py:78
-msgid "y"
-msgstr "г"
-
-#: .\SteamID\steam_user.py:79
-msgid "m"
-msgstr "м"
-
-#: .\SteamID\steam_user.py:80
-msgid "d"
-msgstr "д"
-
-#: .\SteamID\steam_user.py:136
-msgid "h"
-msgstr "ч"
-
-#: .\SteamID\steam_user.py:137
-msgid "min"
-msgstr "м"
+msgstr "Публичный"
 
 #: .\templates\SteamID\Error-page.html:6
 msgid "Error Page"
+msgstr "Ошибка"
+
+#: .\templates\SteamID\Error-page.html:11
+msgid ""
+"\n"
+"            Steam user data not found. Please enter URL steam user profile "
+"like\n"
+"            <span style=\"color: yellow\"><strong>\"https://steamcommunity."
+"com/id/slowlypoke/\"</strong></span> or enter\n"
+"            SteamID like <span style=\"color: yellow\"><strong>"
+"\"76561198217904428\"</strong></span>\n"
+"        "
 msgstr ""
+"\n"
+"            Данные пользователя Steam не найдены. Пожалуйста введите URL пользователя Steam, "
+"например:\n"
+"            <span style=\"color: yellow\"><strong>\"https://steamcommunity."
+"com/id/slowlypoke/\"</strong></span> или введите\n"
+"            SteamID, например: <span style=\"color: yellow\"><strong>"
+"\"76561198217904428\"</strong></span>\n"
+"        "
 
 #: .\templates\SteamID\HomePage.html:8
-msgid "Start page"
-msgstr "Стартовая страница"
+msgid ""
+"You will get data about this Steam User: data about bans, friends, games (if "
+"this data are not hidden by privacy settings)"
+msgstr ""
 
 #: .\templates\SteamID\Template.html:60
 msgid "Loading data.<br> Please wait..."
@@ -95,75 +97,148 @@ msgstr "Загрузка данных.<br> Пожалуйста подождит
 #: .\templates\SteamID\searchbox.html:5
 msgid ""
 "\n"
-"            <p>SteamID is\\'s unique identificator, matherfucker\n"
+"            <p>Welcome to Steam User Finder!\n"
 "            </p>\n"
 "        "
 msgstr ""
+
+#: .\templates\SteamID\searchbox.html:13
+msgid "Enter URL or SteamID"
+msgstr "Введите URL или SteamID"
+
+#: .\templates\SteamID\searchbox.html:22
+msgid ""
+"\n"
+"        <p>How to Use!</p>\n"
+"        <p>Enter Steam User URL or SteamID</p>\n"
+"        <p></p>\n"
+"        <p>Profit!</p>\n"
+"    "
+msgstr ""
+
+#: .\templates\SteamID\tables\UserFriends.html:19
+msgid "Name"
+msgstr "Имя"
+
+#: .\templates\SteamID\tables\UserFriends.html:20
+#: .\templates\SteamID\user-details.html:62
+msgid "Status"
+msgstr "Статус"
+
+#: .\templates\SteamID\tables\UserFriends.html:21
+msgid "In game"
+msgstr "В игре"
+
+#: .\templates\SteamID\tables\UserFriends.html:22
+#, fuzzy
+#| msgid "Friends"
+msgid "Friend from"
+msgstr "Друзья c"
+
+#: .\templates\SteamID\tables\UserFriends.html:23
+msgid "Ban"
+msgstr "Бан"
+
+#: .\templates\SteamID\tables\UserFriends.html:29
+#: .\templates\SteamID\user-details.html:16
+msgid "Add to friend"
+msgstr "Добавить в друзья"
+
+#: .\templates\SteamID\tables\UserGames.html:17
+msgid "Game Name"
+msgstr "Название игры"
+
+#: .\templates\SteamID\tables\UserGames.html:18
+msgid "Total playtime"
+msgstr "Всего в игре"
+
+#: .\templates\SteamID\tables\UserGames.html:19
+msgid "Playtime on Windows"
+msgstr "Итого на Windows"
+
+#: .\templates\SteamID\tables\UserGames.html:20
+msgid "Playtime on Mac"
+msgstr "Итого на Mac"
+
+#: .\templates\SteamID\tables\UserGames.html:21
+msgid "Playtime on Linux"
+msgstr "Итого в Linux"
 
 #: .\templates\SteamID\user-details.html:21
 msgid "VAC ban"
 msgstr "VAC бан"
 
-#: .\templates\SteamID\user-details.html:25
+#: .\templates\SteamID\user-details.html:27
 msgid "VAC ban count"
-msgstr ""
+msgstr "Количество Vac банов"
 
-#: .\templates\SteamID\user-details.html:29
+#: .\templates\SteamID\user-details.html:31
 msgid "Ban community"
-msgstr ""
+msgstr "Бан сообщества"
 
-#: .\templates\SteamID\user-details.html:33
+#: .\templates\SteamID\user-details.html:35
 msgid "Ban games"
-msgstr ""
+msgstr "Игровые баны"
 
-#: .\templates\SteamID\user-details.html:37
+#: .\templates\SteamID\user-details.html:39
 msgid "Ban economy"
-msgstr ""
+msgstr "Бан на площадке"
 
-#: .\templates\SteamID\user-details.html:41
+#: .\templates\SteamID\user-details.html:43
 msgid "Ban last"
-msgstr ""
+msgstr "Последний бан"
 
-#: .\templates\SteamID\user-details.html:60
-msgid "Status"
-msgstr ""
-
-#: .\templates\SteamID\user-details.html:72
+#: .\templates\SteamID\user-details.html:74
 msgid "Real Name"
-msgstr ""
+msgstr "Реальное имя"
 
-#: .\templates\SteamID\user-details.html:76
+#: .\templates\SteamID\user-details.html:78
 msgid "Created"
-msgstr ""
+msgstr "Создан"
 
-#: .\templates\SteamID\user-details.html:80
+#: .\templates\SteamID\user-details.html:82
 msgid "LogOff"
-msgstr ""
+msgstr "Последний раз в сети"
 
-#: .\templates\SteamID\user-details.html:84
+#: .\templates\SteamID\user-details.html:86
 msgid "Game Info"
-msgstr ""
+msgstr "Запущенная игра"
 
-#: .\templates\SteamID\user-details.html:94
+#: .\templates\SteamID\user-details.html:96
 msgid "Country"
-msgstr ""
+msgstr "Страна"
 
-#: .\templates\SteamID\user-details.html:103
+#: .\templates\SteamID\user-details.html:105
 msgid "Visible"
-msgstr ""
+msgstr "Видимость"
 
-#: .\templates\SteamID\user-details.html:107
+#: .\templates\SteamID\user-details.html:109
 msgid "Level"
-msgstr ""
+msgstr "Уровень"
 
-#: .\templates\SteamID\user-details.html:111
+#: .\templates\SteamID\user-details.html:113
 msgid "Experience"
-msgstr ""
+msgstr "Опыт"
 
-#: .\templates\SteamID\user-details.html:120
+#: .\templates\SteamID\user-details.html:122
 msgid "Friends"
 msgstr "Друзья"
 
-#: .\templates\SteamID\user-details.html:125
+#: .\templates\SteamID\user-details.html:127
 msgid "Games"
 msgstr "Игры"
+
+msgid "y"
+msgstr "г"
+
+msgid "m"
+msgstr "м"
+
+msgid "d"
+msgstr "д"
+
+msgid "h"
+msgstr "ч"
+
+msgid "March"
+msgstr "марта"

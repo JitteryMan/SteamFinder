@@ -113,6 +113,7 @@ class SteamUserAdv(SteamUser):
     def set_games(self, games: dict):
         self.games = []
         if games:
+            games = sorted(games, key=lambda game: game['playtime_forever'], reverse=True)
             for game in games:
                 self.games.append(Games(game))
             self.games = [self.games[i:i + 50] for i in range(0, len(self.games), 50)]

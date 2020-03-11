@@ -32,7 +32,11 @@
                         <td class="table-value"><a class="usr-id"
                                                    href="{% url 'SteamID:search' friend.steam_id %}">{{ friend.nick }}</a>
                         </td>
-                        <td class="table-value">{{ friend.get_status }}</td>
+                        <td class="table-value">{% if friend.state == 1 %}
+                            <span style="color: #7FA94F">
+                            {% else %} <span>
+                                {% endif %}
+                            {{ friend.get_status }}</span></td>
                         <td class="table-value">{% if friend.in_game %}
                             <span style="color: #7FA94F">{{ friend.in_game_info }}</span>{% endif %}</td>
                         <td class="table-value">{{ friend.friend_date|date:"d.m.Y" }}</td>
