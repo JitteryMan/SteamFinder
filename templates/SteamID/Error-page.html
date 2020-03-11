@@ -3,9 +3,16 @@
 {% load i18n %}
 
 {% block title %}
-{% trans "Error Page" %}  - Steam User Finder
+    {% trans "Error Page" %}  - Steam User Finder
 {% endblock %}
 
 {% block content %}
-ERROR = Not found user. Check ya!
+    <div class="error_box">
+        {% blocktrans %}
+            Steam user data not found. Please enter URL steam user profile like
+            <span style="color: yellow"><strong>"https://steamcommunity.com/id/slowlypoke/"</strong></span> or enter
+            SteamID like <span style="color: yellow"><strong>"76561198217904428"</strong></span>
+        {% endblocktrans %}
+    </div>
 {% endblock %}
+

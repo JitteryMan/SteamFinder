@@ -6,11 +6,20 @@
 </div>
 
 {% load static %}
+{% load i18n %}
 
 <div>
     {% for game_stack in user.games %}
         <div id="gtabid_{{ forloop.counter0 }}" class="inline-group" style="display:none">
             <table class="table-data" style="width: 100%">
+                <tr>
+                    <th></th>
+                    <th>{% trans "Game Name" %}</th>
+                    <th>{% trans "Total playtime" %}</th>
+                    <th>{% trans "Playtime on Windows" %}</th>
+                    <th>{% trans "Playtime on Mac" %}</th>
+                    <th>{% trans "Playtime on Linux" %}</th>
+                </tr>
                 {% for game in game_stack %}
                     <tr>
                         <td><a href="{{ game.app_url }}" target="_blank"><img src="{{ game.app_logo }}"></a> </td>

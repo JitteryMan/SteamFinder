@@ -13,13 +13,15 @@
         <div class="avatar-logo">
             <img src="{{ user.avatar_big }}">
             <a href="steam://friends/add/{{ user.steam_id }}">
-                <img class="user-add" src="{% static 'SteamID/images/user.png' %}" title="Add to friend">
+                <img class="user-add" src="{% static 'SteamID/images/user.png' %}" title="{% trans "Add to friend" %}">
             </a><br>
             <div class="avatar-data">
                 <table class="table-data">
                     <tr>
                         <td>{% trans 'VAC ban' %}</td>
-                        <td class="table-value">{{ user.ban_VAC |yesno:"+,-" }}</td>
+                        <td class="table-value"{% if user.ban_VAC %}
+                            style="background:linear-gradient(to bottom, rgba(255, 0, 0, 0.5) 0%, rgba(255, 0, 0, 0.1) 100%);"
+                        {% endif %}>{{ user.ban_VAC |yesno:"+,-" }}</td>
                     </tr>
                     <tr>
                         <td>{% trans 'VAC ban count' %}</td>
@@ -27,7 +29,7 @@
                     </tr>
                     <tr>
                         <td>{% trans 'Ban community' %}</td>
-                        <td class="table-value">{{ user.ban_community }}</td>
+                        <td class="table-value">{{ user.ban_community |yesno:"+,-" }}</td>
                     </tr>
                     <tr>
                         <td>{% trans 'Ban games' %}</td>
@@ -39,7 +41,7 @@
                     </tr>
                     <tr>
                         <td>{% trans 'Ban last' %}</td>
-                        <td class="table-value">{{ user.ban_last }}</td>
+                        <td class="table-value">{{ user.days_to_ymd }}</td>
                     </tr>
                 </table>
             </div>
@@ -109,7 +111,7 @@
                 </tr>
                 <tr>
                     <td>{% trans 'Experience' %}</td>
-                    <td class="table-value">{{ user.xp|default_if_none:"-" }}/{{ user.progress_max|default_if_none:"-" }}</td>
+                    <td class="table-value">{{ user.xp|default:"-" }}/{{ user.progress_max|default:"0" }}</td>
                 </tr>
             </table>
         </div>

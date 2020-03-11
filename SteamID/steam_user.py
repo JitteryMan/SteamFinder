@@ -75,9 +75,9 @@ class SteamUser:
         years = self.ban_last // 365
         month = round(self.ban_last % 365 // 30.42)
         days = round(self.ban_last % 365 % 30.42)
-        s = str(years) + _('y') if years else ''
-        s += str(month) + _('m') if month else ''
-        s += str(days) + _('d')
+        s = f'{years}{_("y")} ' if years else ''
+        s += f'{month}{_("m")} ' if month else ''
+        s += f'{days}{_("d")}'
         return s
 
 

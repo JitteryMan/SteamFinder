@@ -3,14 +3,14 @@
 <div class="box-left">
     <div class="info-block">
         {% blocktrans %}
-            <p>SteamID is\'s unique identificator, matherfucker
+            <p>Welcome to Steam User Finder!
             </p>
         {% endblocktrans %}
     </div>
 
     <form method="get" action="{% url 'SteamID:search' 'find_' %}" class="steamid">
         <div class="searchbox">
-            <input id="search" placeholder="Enter URL or SteamID" required name="steam">
+            <input id="search" placeholder="{% trans "Enter URL or SteamID" %}" required name="steam">
             {% load static %}
             <input id="search-btn" type="submit" value="">
         </div>
@@ -19,11 +19,11 @@
 
 
 <div class="info-block" style="width: 35%">
-    <p>SteamID это уникальный номер используемый для идентификации аккаунта Стим. SteamID может быть конвертирован
-        в более новые steamID3 или steamID64, также связан с комьюнити ID или ID друга. С этим steamID64 можно
-        найти страницу пользователя в Steam<br>
-        Оригинальный URL - это опция, которая позволяет персонализировать страницу пользователя в сообществе Steam.
-    </p>
+    {% blocktrans %}
+        <p>How to Use!</p>
+        <p>1</p>
+        <p>2</p>
+    {%  endblocktrans %}
 </div>
 
 <div style="clear: both"></div>

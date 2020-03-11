@@ -6,17 +6,27 @@
 </div>
 
 {% load static %}
+{% load i18n %}
 
 
 <div>
     {% for friends_stack in user.friends %}
         <div id="tabid_{{ forloop.counter0 }}" class="inline-group" style="display:none">
             <table class="table-data" style="width: 100%">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Status" %}</th>
+                    <th>{% trans "In game" %}</th>
+                    <th>{% trans "Friend from" %}</th>
+                    <th>{% trans "Ban" %}</th>
+                </tr>
                 {% for friend in friends_stack %}
                     <tr>
                         <td><a href="steam://friends/add/{{ friend.steam_id }}">
                             <img class="user-add" src="{% static 'SteamID/images/user.png' %}"
-                                 title="Add to friend">
+                                 title="{% trans "Add to friend" %}">
                         </a></td>
                         <td class="table-value"><img src="{{ friend.avatar_mini }}"></td>
                         <td class="table-value"><a class="usr-id"
@@ -25,8 +35,10 @@
                         <td class="table-value">{{ friend.get_status }}</td>
                         <td class="table-value">{% if friend.in_game %}
                             <span style="color: #7FA94F">{{ friend.in_game_info }}</span>{% endif %}</td>
-                        <td class="table-value">{{ friend.relationship }} from {{ friend.friend_date|date:"d.m.Y" }}</td>
-                        <td class="table-value">{{ friend.ban_VAC_count }}</td>
+                        <td class="table-value">{{ friend.friend_date|date:"d.m.Y" }}</td>
+                        <td class="table-value" {% if friend.ban_VAC_count > 0 %}
+                            style="background:linear-gradient(to bottom, rgba(255, 0, 0, 0.5) 0%, rgba(255, 0, 0, 0.1) 100%);"
+                        {% endif %} >{{ friend.ban_VAC_count }}</td>
                     </tr>
                 {% endfor %}
             </table>
