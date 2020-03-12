@@ -120,12 +120,12 @@
     </div>
 
     {% if user.friends %}
-        <h2>{% trans "Friends" %}</h2>
+        <h2>{% trans "Friends" %} ({{ user.friends_count }})</h2>
         {% include 'SteamID/tables/UserFriends.html' %}
     {% endif %}
 
     {% if user.games %}
-        <h2>{% trans "Games" %}</h2>
+        <h2>{% trans "Games" %} ({{ user.games_count }})</h2>
         {% include 'SteamID/tables/UserGames.html' %}
     {% endif %}
 

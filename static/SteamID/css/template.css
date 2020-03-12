@@ -95,6 +95,7 @@ input#search-btn {
     background: #171a21;
     border: solid 5px #717171;
     margin-bottom: 1em;
+    color: #dedede;
 }
 
 .info-block p {
@@ -153,6 +154,41 @@ input#search-btn {
     text-shadow: 0 0 1px white;
 }
 
+/*----- HOMEPAGE -----*/
+blockquote {
+display: block;
+    padding: 10px 0 0 10px;
+    position: relative;
+    line-height: 1.2;
+    text-align: justify;
+}
+
+blockquote::before {
+    content: "“"; /*Unicode for Left Double Quote*/
+    font-family: Georgia, serif;
+    font-size: 60px;
+    font-weight: bold;
+    color: #999;
+    position: absolute;
+    left: -30px;
+    top: 5px;
+}
+
+blockquote::after {
+    content: "";
+}
+
+cite {
+    display: block;
+    font-style: italic;
+    text-align: right;
+}
+
+cite:before {
+    content: "- ";
+}
+
+
 /*----- DETAILS -----*/
 #avatar-content {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%);
@@ -185,8 +221,8 @@ img.user-add {
     transition: all .3s ease;
 }
 
-img.user-add:hover{
-    background: rgba(255,255,255,0.3);
+img.user-add:hover {
+    background: rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 5px #fff;
 }
 
@@ -265,7 +301,7 @@ td.table-value {
 }
 
 /*----- FOOTER -----*/
-.footer{
+.footer {
     position: fixed;
     bottom: 5px;
     right: 5px;
@@ -273,7 +309,7 @@ td.table-value {
     transition: filter 0.3s ease;
 }
 
-.footer:hover{
+.footer:hover {
     filter: grayscale(0);
 }
 

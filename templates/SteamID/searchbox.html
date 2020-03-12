@@ -3,8 +3,10 @@
 <div class="box-left">
     <div class="info-block">
         {% blocktrans %}
-            <p>Welcome to Steam User Finder!
-            </p>
+            <p>Welcome to the Steam User Finder!<br>
+                Using this service, you can get data about any Steam user, was he banned, who is his friends and what
+                games he owns *
+            </p><p style="color: #8F98A0">* If his profile is not hidden by privacy settings </p>
         {% endblocktrans %}
     </div>
 
@@ -22,9 +24,11 @@
     {% blocktrans %}
         <p>How to Use!</p>
         <p>Enter Steam User URL or SteamID</p>
-        <p></p>
+        <p>Wait a little</p>
         <p>Profit!</p>
-    {%  endblocktrans %}
+        <p style="color: #8F98A0;  line-height: 20px;">Loading speed depends on how many friends user has and how many
+            games he owns.</p>
+    {% endblocktrans %}
 </div>
 
 <div style="clear: both"></div>

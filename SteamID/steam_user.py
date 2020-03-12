@@ -98,6 +98,7 @@ class SteamUserAdv(SteamUser):
                 friend_user.set_relationship(friend.get('relationship'))
                 friend_user.set_friend_date(friend.get('friend_since'))
                 self.friends.append(friend_user)
+            self.friends_count = len(self.friends)
             self.friends = [self.friends[i:i + 20] for i in range(0, len(self.friends), 20)]
 
     def set_badges(self, badges: dict):
@@ -116,6 +117,7 @@ class SteamUserAdv(SteamUser):
             games = sorted(games, key=lambda game: game['playtime_forever'], reverse=True)
             for game in games:
                 self.games.append(Games(game))
+            self.games_count = len(self.games)
             self.games = [self.games[i:i + 50] for i in range(0, len(self.games), 50)]
 
 

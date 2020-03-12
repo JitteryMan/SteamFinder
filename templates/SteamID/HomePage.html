@@ -1,9 +1,27 @@
-{%  extends 'SteamID/Template.html' %}
+{% extends 'SteamID/Template.html' %}
 
 {% block title %}Steam User Finder{% endblock %}
 
 {% load i18n %}
 
 {% block content %}
-    {% trans "You will get data about this Steam User: data about bans, friends, games (if this data are not hidden by privacy settings)" %}
+
+        <div class="info-block">
+            <blockquote>
+                {% blocktrans %}
+                Steam is a video game digital distribution service by Valve. It was launched as a standalone software
+                client
+                in September 2003 as a way for Valve to provide automatic updates for their games, and expanded to
+                include
+                games from third-party publishers. Steam has also expanded into an online web-based and mobile digital
+                storefront. Steam offers digital rights management (DRM), matchmaking servers, video streaming, and
+                social
+                networking services. It also provides the user with installation and automatic updating of games, and
+                community features such as friends lists and groups, cloud saving, and in-game voice and chat
+                functionality.
+                {% endblocktrans %}
+                <cite>{% trans "Wikipedia" %}</cite>
+            </blockquote>
+        </div>
+
 {% endblock %}

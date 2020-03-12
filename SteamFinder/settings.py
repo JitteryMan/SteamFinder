@@ -115,6 +115,8 @@ LANGUAGE_CODE = 'ru-RU'
 LANGUAGES = [
     ('en', 'English'),
     ('ru', 'Русский'),
+    ('be', 'Беларуская'),
+    ('uk', 'Українська'),
 ]
 
 TIME_ZONE = 'UTC'
