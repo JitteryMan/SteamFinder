@@ -45,7 +45,7 @@
                     {% get_current_language as CURR_LANG %}
                     {% for language in langlist %}
                         <option value="{{ language.code }}" {% if language.code == CURR_LANG %} selected {% endif %}>
-                            {{ language.name_local }}
+                            {{ language.name_local|title }}
                         </option>
                     {% endfor %}
                 </select>
