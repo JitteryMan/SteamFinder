@@ -5,3 +5,4 @@ migrations
 keys.py
 db.sqlite3
 *.po
+*.mo

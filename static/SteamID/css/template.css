@@ -277,7 +277,7 @@ td.table-value {
     transition: 0.3s;
     border-radius: 2px;
     border: none;
-    margin: 0 2px;
+    margin: 2px;
     display: inline-block;
     text-decoration: none;
     color: #67c1f5;
