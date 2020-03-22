@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.utils.translation import gettext as _
 from keys import STEAM_API_KEY
 from .models import User
 from .steam_api import get_steamid_from_url, SteamAPI
