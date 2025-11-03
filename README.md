@@ -6,7 +6,7 @@
 [DEMO](https://steamfinder.pythonanywhere.com/)
 
 ## Languages
-![en](https://www.countryflags.io/gb/shiny/24.png)
-![ru](https://www.countryflags.io/ru/shiny/24.png)
-![by](https://www.countryflags.io/by/shiny/24.png)
-![ua](https://www.countryflags.io/ua/shiny/24.png)
+![en](https://www.countryflags.com/wp-content/uploads/united-kingdom-flag-png-large.png)
+![ru](https://www.countryflags.com/wp-content/uploads/russia-flag-png-large.png)
+![by](https://upload.wikimedia.org/wikipedia/commons/9/95/Flag_of_Belarus_%28w-r-w%29_with_Arms_%282020%29.svg)
+![ua](https://www.countryflags.com/wp-content/uploads/ukraine-flag-png-large.png)
