@@ -43,7 +43,7 @@ class SteamUser:
         # get data from game, if user in game
         self.in_game_info = steam_data.get('gameextrainfo')
         # get country (2 letters ISO code)
-        self.country = steam_data.get('loccountrycode')
+        self.country = str(steam_data.get('loccountrycode')).lower()
         # BANS
         self.ban_community = steam_data.get('ban').get('CommunityBanned')
         self.ban_VAC = steam_data.get('ban').get('VACBanned')
@@ -126,8 +126,8 @@ class Games:
         self.app_id = game_info.get('appid')
         self.app_name = game_info.get('name')
         self.app_play_time = self.in_game(game_info.get('playtime_forever'))
-        self.app_icon = f'{APP_MEDIA}{self.app_id}/{game_info.get("img_icon_url")}.jpg'
-        self.app_logo = f'{APP_MEDIA}{self.app_id}/{game_info.get("img_logo_url")}.jpg'
+        self.app_icon = f'{APP_MEDIA}{self.app_id}/header.jpg'
+        self.app_logo = f'{APP_MEDIA}{self.app_id}/header.jpg'
         self.app_url = f'{APP_URL}{self.app_id}'
         self.app_visible = game_info.get('has_community_visible_stats')
         self.app_windows = self.in_game(game_info.get('playtime_windows_forever'))
@@ -136,8 +136,10 @@ class Games:
 
     @staticmethod
     def in_game(minutes: int) -> str:
-        s = f'{(minutes // 60)}{_("h")} ' if minutes // 60 > 0 else ''
-        s += f'{(minutes % 60)}{_("m")}'
+        s = ''
+        if minutes:
+            s = f'{(minutes // 60)}{_("h")} ' if minutes // 60 > 0 else ''
+            s += f'{(minutes % 60)}{_("m")}'
         return s
 
 

@@ -11,12 +11,13 @@
 
 {% block content %}
     <div id="avatar-content">
+        <h2>{{ user.nick }}</h2>
         <div class="avatar-logo">
             <img src="{{ user.avatar_big }}">
             <a href="steam://friends/add/{{ user.steam_id }}">
                 <img class="user-add" src="{% static 'SteamID/images/user.png' %}" title="{% trans "Add to friend" %}">
             </a><br>
-            <div class="avatar-data">
+            <div class="avatar-data" id="ad1">
                 <table class="table-data">
                     <tr>
                         <td>{% trans 'VAC ban' %}</td>
@@ -47,8 +48,7 @@
                 </table>
             </div>
         </div>
-        <h2>{{ user.nick }}</h2>
-        <div class="avatar-data">
+        <div class="avatar-data" id="ad2">
             <table class="table-data">
                 <tr>
                     <td>SteamID</td>
@@ -97,7 +97,7 @@
                     <td>{% trans 'Country' %}</td>
                     <td class="table-value">
                         {% if user.country %}
-                            <img src="https://www.countryflags.io/{{ user.country }}/shiny/32.png"
+                            <img src="https://flagcdn.com/32x24/{{ user.country }}.png"
                                  title="{{ user.country }}">
                         {% endif %}
                     </td>
